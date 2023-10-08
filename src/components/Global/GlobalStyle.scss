@@ -1,0 +1,39 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+    --primary: #fe2c55;
+    --white: #fff;
+    --text-color: #333;
+    --border-color: rgba(22, 24, 35, 0.12);
+    --bg-color-hover: rgba(22, 24, 35, 0.03);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'IBM Plex Sans', TikTokFont, Arial, Tahoma, PingFangSC, sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+}
+
+input,
+button,
+[tabindex] {
+    border: none;
+    outline: none;
+}
+
+a[href] {
+    text-decoration: none;
+    color: var(--text-color);
+}

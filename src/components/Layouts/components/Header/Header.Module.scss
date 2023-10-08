@@ -1,0 +1,123 @@
+.wrapper {
+    --search-border-radius: 92px;
+    --search-height: 46px;
+    --search-height-spacer: 28px;
+    --search-width-btn: 52px;
+
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
+    height: 60px;
+    padding: 0 24px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    cursor: pointer;
+}
+
+.search,
+.search-result {
+    width: 500px;
+}
+
+.search {
+    position: relative;
+    height: var(--search-height);
+    padding-left: 16px;
+    background-color: #f1f1f2;
+    border-radius: var(--search-border-radius);
+    border: 1.5px solid transparent;
+    display: flex;
+
+    input {
+        flex: 1;
+        height: 100%;
+        font-size: 1.6rem;
+        color: rgba(22, 24, 35, 1);
+        background-color: #f1f1f2;
+        caret-color: var(--primary);
+    }
+
+    input:not(:placeholder-shown) ~ .search-btn {
+        color: #4c4e57;
+        background-color: rgba(22, 24, 35, 0.06);
+    }
+
+    input:not(:placeholder-shown) ~ .clear {
+        display: block;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: var(--search-height-spacer);
+        top: calc((var(--search-height) - var(--search-height-spacer)) / 2);
+        right: var(--search-width-btn);
+        background-color: #d7d7d9;
+    }
+
+    &:focus-within {
+        border-color: rgba(22, 24, 35, 0.2);
+    }
+}
+
+.clear,
+.loading {
+    display: none;
+    font-size: 1.4rem;
+    position: absolute;
+    right: calc(var(--search-width-btn) + 16px);
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a7a7ab;
+}
+
+.search-btn {
+    font-size: 1.9rem;
+    color: rgba(22, 24, 35, 0.34);
+    width: var(--search-width-btn);
+    height: 100%;
+    border-top-right-radius: var(--search-border-radius);
+    border-bottom-right-radius: var(--search-border-radius);
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgba(22, 24, 35, 0.06);
+        color: #4c4e57;
+    }
+}
+.search-title {
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: rgba(22, 24, 35, 0.75);
+    padding: 5px 12px 3px;
+}
+
+// Action
+.action {
+    display: flex;
+    align-items: center;
+}
+
+// icon
+.plus {
+    margin-right: 8px;
+}
+
+.btn-more {
+    font-size: 2rem;
+    padding: 2px 8px;
+    margin-left: 28px;
+    cursor: pointer;
+    background-color: #fff;
+    color: #9b9ca1;
+    background-color: transparent;
+}
+
+// Custum btn color
+// .custom-color-btn {
+//     color: rgba(22, 24, 35, 0.75);
+// }
