@@ -1,14 +1,10 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment } from 'react';
 import classNames from 'classnames/bind';
-// import 'tippy.js/dist/tippy.css';
-import HeadlessTippy from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faCircleXmark,
-    faMagnifyingGlass,
-    faSpinner,
+    faMoon,
     faPlus,
     faEllipsisVertical,
     faEarthAsia,
@@ -21,17 +17,13 @@ import {
     faUser,
     faHeart,
 } from '@fortawesome/free-solid-svg-icons';
-//
-import { Wrapper as PopperWrapper } from '~/components/Popper';
-import AccoutItem from '~/components/AccountItem';
-import SearchHistory from '~/components/SearchHistory';
 import Button from '~/components/Button';
 import styles from './Header.Module.scss';
 import images from '~/assets/images';
 import Menu from '~/components/Popper/Menu';
-import { faMoon } from '@fortawesome/free-regular-svg-icons';
 import { Mailbox, MessageIcon } from '~/components/Icons';
 import Image from '~/components/Image';
+import Search from '~/components/Search';
 
 // Variable
 const cx = classNames.bind(styles);
@@ -126,43 +118,12 @@ const USER_MENU = [
 ];
 
 function Header() {
-    const [searchResult, setSearchResult] = useState([]);
-    useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([]);
-        }, 0);
-    }, []);
     return (
         <header className={cx('wrapper')}>
             <a href="https://www.tiktok.com/" className={cx('logo')}>
                 <img src={images.logo} alt="Tiktok" />
             </a>
-            <HeadlessTippy
-                interactive
-                visible={searchResult.length > 0}
-                render={(attrs) => (
-                    <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                        <PopperWrapper>
-                            <h4 className={cx('search-title')}>Tìm kiếm gần đây</h4>
-                            <SearchHistory />
-                            <h4 className={cx('search-title')}>Tài khoản</h4>
-                            <AccoutItem />
-                        </PopperWrapper>
-                    </div>
-                )}
-            >
-                <div className={cx('search')}>
-                    <input placeholder="Search accounts and videos" />
-                    <button className={cx('clear')}>
-                        <FontAwesomeIcon icon={faCircleXmark} />
-                    </button>
-                    <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
-
-                    <button className={cx('search-btn')}>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </button>
-                </div>
-            </HeadlessTippy>
+            <Search />
             <div className={cx('action')}>
                 {cunrrentUser ? (
                     <>

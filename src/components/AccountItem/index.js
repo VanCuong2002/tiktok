@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import styles from './AccoutItem.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import Image from '../Image';
 
 const cx = classNames.bind(styles);
 
@@ -32,7 +33,7 @@ const accountData = [
         id: 4,
         name: 'Tần Nguyễn',
         username: 'tannguyen',
-        avatar: 'https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/a0ec20b0c8aefcac5b1ed2ed554dd474~c5_100x100.jpeg?x-expires=1696608000&x-signature=rSe7DyfgIgV0s2zyME384nxn2bU%3D',
+        avatar: 'https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/69f62718d498714c43997f6aea4dc4dd.jpeg?x-expires=1697263200&x-signature=tgTSVYrtxMcEWOFZxWtEPGOaZGY%3D',
         showCheck: false,
     },
 ];
@@ -40,7 +41,7 @@ const accountData = [
 function AccoutItem({ account }) {
     return (
         <div className={cx('wrapper')} key={account.id}>
-            <img className={cx('avatar')} src={account.avatar} alt={account.name} />
+            <Image className={cx('avatar')} src={account.avatar} alt={account.name} />
             <div className={cx('info')}>
                 <h4 className={cx('name')}>
                     <span>{account.name}</span>
