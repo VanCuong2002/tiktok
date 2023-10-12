@@ -5,8 +5,9 @@
     min-width: 100px;
     padding: 8px 8px;
     font-weight: 700;
-    border-radius: 4px;
     font-size: 1.6rem;
+    font-family: 'IBM Plex Sans';
+    border-radius: 4px;
     cursor: pointer;
     color: var(--text-color);
     background-color: var(--white);
@@ -69,7 +70,7 @@
 
 .text {
     margin: 0 auto;
-    height: 36px;
+    line-height: 1.8rem;
     min-width: 112px;
     border-color: var(--border-color);
     border-radius: 2px;

@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
+// import 'tippy.js/dist/tippy.css';
+import HeadlessTippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Tippy from '@tippyjs/react/headless';
 import {
     faCircleXmark,
     faMagnifyingGlass,
@@ -11,10 +14,13 @@ import {
     faEarthAsia,
     faCircleQuestion,
     faKeyboard,
-    faBoltLightning,
     faLightbulb,
+    faArrowRightFromBracket,
+    faGear,
+    faCoins,
+    faUser,
+    faHeart,
 } from '@fortawesome/free-solid-svg-icons';
-
 //
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccoutItem from '~/components/AccountItem';
@@ -27,6 +33,7 @@ import { faMoon } from '@fortawesome/free-regular-svg-icons';
 
 // Variable
 const cx = classNames.bind(styles);
+const cunrrentUser = true;
 const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faLightbulb} />,
@@ -36,6 +43,40 @@ const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
         title: 'Tiếng Việt',
+        sub: {
+            title: 'Ngôn ngữ',
+            data: [
+                {
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    code: 'italia',
+                    title: 'Italiano',
+                },
+                {
+                    code: 'china',
+                    title: 'Tiếng Trung',
+                    sub: {
+                        title: 'Tiếng Trung',
+                        data: [
+                            {
+                                code: 'cng',
+                                title: 'Tiếng Trung(Giản thể)',
+                            },
+                            {
+                                code: 'cnp',
+                                title: 'Tiếng Trung(Phồn thể)',
+                            },
+                        ],
+                    },
+                },
+            ],
+        },
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -52,6 +93,36 @@ const MENU_ITEMS = [
     },
 ];
 
+const USER_MENU = [
+    {
+        icon: <FontAwesomeIcon icon={faUser} />,
+        title: 'Xem hồ sơ',
+        to: '/profile',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faHeart} />,
+        title: 'Yêu thích',
+        to: '/like',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faCoins} />,
+        title: 'Nhận xu',
+        to: '/coin',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faGear} />,
+        title: 'Cài đặt',
+        to: '/setting',
+    },
+    ...MENU_ITEMS,
+    {
+        icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
+        title: 'Đăng xuất',
+        to: '/logout',
+        separate: true,
+    },
+];
+
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
     useEffect(() => {
@@ -64,7 +135,7 @@ function Header() {
             <a href="https://www.tiktok.com/" className={cx('logo')}>
                 <img src={images.logo} alt="Tiktok" />
             </a>
-            <Tippy
+            <HeadlessTippy
                 interactive
                 visible={searchResult.length > 0}
                 render={(attrs) => (
@@ -89,18 +160,43 @@ function Header() {
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </button>
                 </div>
-            </Tippy>
+            </HeadlessTippy>
             <div className={cx('action')}>
-                <Button leftIcon={<FontAwesomeIcon icon={faPlus} />} text to="/upload">
-                    Tải lên
-                </Button>
-                <Button className={cx('custom-color-btn')} primary>
-                    Đăng nhập
-                </Button>
-                <Menu items={MENU_ITEMS}>
-                    <button className={cx('btn-more')}>
-                        <FontAwesomeIcon icon={faEllipsisVertical} />
-                    </button>
+                {cunrrentUser ? (
+                    <>
+                        <Button leftIcon={<FontAwesomeIcon icon={faPlus} />} text to="/upload">
+                            Tải lên
+                        </Button>
+                        <Tippy content="Tin nhắn">
+                            <img className={cx('action-icon')} src={images.message} alt="Tin nhắn" />
+                        </Tippy>
+                        <Tippy content="Hộp thư">
+                            <img className={cx('action-icon')} src={images.fax} alt="Hộp thư" />
+                        </Tippy>
+                    </>
+                ) : (
+                    <Fragment>
+                        <Button leftIcon={<FontAwesomeIcon icon={faPlus} />} text to="/upload">
+                            Tải lên
+                        </Button>
+                        <Button className={cx('custom-color-btn')} primary>
+                            Đăng nhập
+                        </Button>
+                    </Fragment>
+                )}
+
+                <Menu items={cunrrentUser ? USER_MENU : MENU_ITEMS}>
+                    {cunrrentUser ? (
+                        <img
+                            className={cx('user-avatar')}
+                            src="https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-giso/9ad47e71816c884b785dd10891662bf3~c5_100x100.jpeg?x-expires=1697036400&x-signature=gwtK9HqA6PelU586TeB6opfU7yc%3D"
+                            alt="avatar"
+                        />
+                    ) : (
+                        <button className={cx('btn-more')}>
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                        </button>
+                    )}
                 </Menu>
             </div>
         </header>
