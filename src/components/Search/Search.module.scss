@@ -47,13 +47,25 @@
 
 .clear,
 .loading {
-    display: none;
+    top: 50%;
     font-size: 1.4rem;
     position: absolute;
     right: calc(var(--search-width-btn) + 16px);
-    top: 50%;
     transform: translateY(-50%);
     color: #a7a7ab;
+}
+
+.loading {
+    animation: spinner 0.8s linear infinite;
+}
+
+@keyframes spinner {
+    from {
+        transform: translateY(-50%) rotate(0);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
 }
 
 .search-btn {
