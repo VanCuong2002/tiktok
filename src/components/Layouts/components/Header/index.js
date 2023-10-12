@@ -30,6 +30,8 @@ import styles from './Header.Module.scss';
 import images from '~/assets/images';
 import Menu from '~/components/Popper/Menu';
 import { faMoon } from '@fortawesome/free-regular-svg-icons';
+import { Mailbox, MessageIcon } from '~/components/Icons';
+import Image from '~/components/Image';
 
 // Variable
 const cx = classNames.bind(styles);
@@ -167,11 +169,16 @@ function Header() {
                         <Button leftIcon={<FontAwesomeIcon icon={faPlus} />} text to="/upload">
                             Tải lên
                         </Button>
-                        <Tippy content="Tin nhắn">
-                            <img className={cx('action-icon')} src={images.message} alt="Tin nhắn" />
+                        <Tippy delay={[0, 50]} content="Tin nhắn" placement="bottom">
+                            <button className={cx('action-btn')}>
+                                <MessageIcon />
+                            </button>
                         </Tippy>
-                        <Tippy content="Hộp thư">
-                            <img className={cx('action-icon')} src={images.fax} alt="Hộp thư" />
+                        <Tippy delay={[0, 50]} content="Hộp thư" placement="bottom">
+                            <button className={cx('action-btn')}>
+                                <Mailbox />
+                                <span className={cx('badge')}>12</span>
+                            </button>
                         </Tippy>
                     </>
                 ) : (
@@ -187,10 +194,10 @@ function Header() {
 
                 <Menu items={cunrrentUser ? USER_MENU : MENU_ITEMS}>
                     {cunrrentUser ? (
-                        <img
+                        <Image
                             className={cx('user-avatar')}
-                            src="https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-giso/9ad47e71816c884b785dd10891662bf3~c5_100x100.jpeg?x-expires=1697036400&x-signature=gwtK9HqA6PelU586TeB6opfU7yc%3D"
-                            alt="avatar"
+                            src="https://files.fullstack.edu.vn/f8-prod/user_avatars/1/623d4b2d95cec.png"
+                            alt="Nguyen Van A"
                         />
                     ) : (
                         <button className={cx('btn-more')}>
