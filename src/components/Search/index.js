@@ -1,32 +1,34 @@
-import { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import classNames from 'classnames/bind';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styles from './Search.module.scss';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
-import AccoutItem from '~/components/AccountItem';
+import AccountItem from '~/components/AccountItem';
 import SearchHistory from '~/components/SearchHistory';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { SearchIcon } from '../Icons';
+import useDebounce from '~/hooks/useDebounce';
 
 const cx = classNames.bind(styles);
 
 function Search() {
     const [searchResult, setSearchResult] = useState([]);
-    const [searchValue, setSearchValue] = useState(); // Text nhập input
+    const [searchValue, setSearchValue] = useState(''); // Text nhập input
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
     const inputRef = useRef();
+    const debounce = useDebounce(searchValue, 600);
 
     useEffect(() => {
-        if (!searchValue || !searchValue.trim()) {
+        if (!debounce) {
             setSearchResult([]);
             return;
         }
 
         setLoading(true);
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounce)}&type=less`)
             .then((res) => res.json())
             .then((res) => {
                 setSearchResult(res.data);
@@ -35,7 +37,7 @@ function Search() {
             .catch(() => {
                 setLoading(false);
             });
-    }, [searchValue]);
+    }, [debounce]);
 
     const handleClear = () => {
         inputRef.current.focus();
@@ -46,6 +48,19 @@ function Search() {
     const handleHileResult = () => {
         setShowResult(false);
     };
+
+    const handleInputChange = (e) => {
+        const inputValue = e.target.value;
+
+        // Kiểm tra xem có ký tự không phải dấu cách nào đầu tiên không
+        if (inputValue.length > 0 && inputValue.charAt(0) === ' ') {
+            // Loại bỏ dấu cách đầu tiên nếu có
+            setSearchValue(inputValue.trim());
+        } else {
+            setSearchValue(inputValue);
+        }
+    };
+
     return (
         <HeadlessTippy
             interactive
@@ -57,7 +72,7 @@ function Search() {
                         <SearchHistory />
                         <h4 className={cx('search-title')}>Tài khoản</h4>
                         {searchResult.map((result) => (
-                            <AccoutItem key={result.id} data={result} />
+                            <AccountItem key={result.id} data={result} />
                         ))}
                     </PopperWrapper>
                 </div>
@@ -70,7 +85,7 @@ function Search() {
                     value={searchValue}
                     placeholder="Search accounts and videos"
                     spellCheck={false}
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={handleInputChange}
                     onFocus={() => setShowResult(true)}
                 />
                 {searchValue && !loading && (

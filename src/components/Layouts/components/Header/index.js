@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react';
-
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faMoon,
@@ -17,6 +17,7 @@ import {
     faUser,
     faHeart,
 } from '@fortawesome/free-solid-svg-icons';
+
 import Button from '~/components/Button';
 import styles from './Header.Module.scss';
 import images from '~/assets/images';
@@ -24,6 +25,7 @@ import Menu from '~/components/Popper/Menu';
 import { Mailbox, MessageIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import Search from '~/components/Search';
+import routes from '~/config/routes';
 
 // Variable
 const cx = classNames.bind(styles);
@@ -120,9 +122,9 @@ const USER_MENU = [
 function Header() {
     return (
         <header className={cx('wrapper')}>
-            <a href="https://www.tiktok.com/" className={cx('logo')}>
+            <Link to={routes.home} className={cx('logo')}>
                 <img src={images.logo} alt="Tiktok" />
-            </a>
+            </Link>
             <Search />
             <div className={cx('action')}>
                 {cunrrentUser ? (

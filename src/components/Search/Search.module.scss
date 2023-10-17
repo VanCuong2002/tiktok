@@ -19,6 +19,7 @@
         color: rgba(22, 24, 35, 1);
         background-color: #f1f1f2;
         caret-color: var(--primary);
+        font-family: 'IBM Plex Sans';
     }
 
     input:not(:placeholder-shown) ~ .search-btn {

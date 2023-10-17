@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-function Menu({ children, items = [] }) {
+function Menu({ children, items = [], hideOnClick = false }) {
     const [page, setPage] = useState([{ data: items }]);
     const current = page[page.length - 1];
     const renderItem = () => {
@@ -27,7 +27,7 @@ function Menu({ children, items = [] }) {
     return (
         <Tippy
             interactive
-            // visible
+            hideOnClick={hideOnClick}
             delay={[0, 600]}
             offset={[12, 12]}
             placement="bottom-end"
