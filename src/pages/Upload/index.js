@@ -1,9 +1,7 @@
 function Upload() {
     return (
-        <div>
-            <div className="content">
-                <h2>Upload Page</h2>
-            </div>
+        <div className="content">
+            <h2 style={{ height: 3000 }}>Upload Page</h2>
         </div>
     );
 }

@@ -1,6 +1,8 @@
 .search,
 .search-result {
     width: 500px;
+    overflow-y: overlay;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 12px;
 }
 
 .search {

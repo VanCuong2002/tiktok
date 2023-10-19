@@ -121,7 +121,7 @@ const USER_MENU = [
 
 function Header() {
     return (
-        <header className={cx('wrapper')}>
+        <header className={cx('wrapperr ')}>
             <Link to={routes.home} className={cx('logo')}>
                 <img src={images.logo} alt="Tiktok" />
             </Link>
